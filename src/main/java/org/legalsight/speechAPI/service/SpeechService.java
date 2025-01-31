@@ -48,7 +48,7 @@ public class SpeechService {
     @Transactional
     public SpeechDTO update(SpeechDTO speechDTO, String id) {
         log.debug("Updating speech `{}`", id);
-        Speech speech = speechMapper.fromSpeechRequest(speechDTO);
+        Speech speech = speechMapper.toEntity(speechDTO);
         speech.setId(id);
         speechRepository.save(speech);
         return speechDTO;

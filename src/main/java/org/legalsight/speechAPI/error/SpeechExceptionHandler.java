@@ -14,25 +14,25 @@ import java.net.URI;
 @Slf4j
 public class SpeechExceptionHandler {
 
-  @ExceptionHandler({MethodArgumentNotValidException.class})
-  public ResponseEntity<SpeechProblemDetail> handleBadRequest(MethodArgumentNotValidException ex) {
-    log.error("Invalid arguments found : `{}`", ex.getMessage());
-    SpeechProblemDetail problem = new SpeechProblemDetail();
-    problem.setStatus(HttpStatus.BAD_REQUEST);
-    problem.setErrorCode("VALIDATION_ERROR");
-    return ResponseEntity.status(problem.getStatus()).body(problem);
-  }
+    @ExceptionHandler({MethodArgumentNotValidException.class})
+    public ResponseEntity<SpeechProblemDetail> handleBadRequest(MethodArgumentNotValidException ex) {
+        log.error("Invalid arguments found : `{}`", ex.getMessage());
+        SpeechProblemDetail problem = new SpeechProblemDetail();
+        problem.setStatus(HttpStatus.BAD_REQUEST);
+        problem.setErrorCode("VALIDATION_ERROR");
+        return ResponseEntity.status(problem.getStatus()).body(problem);
+    }
 
-  @ExceptionHandler({CoreException.class})
-  public ResponseEntity<SpeechProblemDetail> handleSpeechException(CoreException theCoreException,
-      HttpServletRequest theRequest) {
-    log.error("Error occurred : `{}`", theCoreException.getMessage());
-    SpeechProblemDetail problem = new SpeechProblemDetail();
-    problem.setStatus(theCoreException.getErrorStatus());
-    problem.setErrorCode(theCoreException.getErrorCode());
-    URI instance = URI.create(theRequest.getRequestURI());
-    problem.setInstance(instance);
-    return ResponseEntity.status(problem.getStatus()).body(problem);
-  }
+    @ExceptionHandler({CoreException.class})
+    public ResponseEntity<SpeechProblemDetail> handleSpeechException(CoreException speechException,
+                                                                     HttpServletRequest theRequest) {
+        log.error("Error occurred : `{}`", speechException.getMessage());
+        SpeechProblemDetail problem = new SpeechProblemDetail();
+        problem.setStatus(speechException.getErrorStatus());
+        problem.setErrorCode(speechException.getErrorCode());
+        URI instance = URI.create(theRequest.getRequestURI());
+        problem.setInstance(instance);
+        return ResponseEntity.status(problem.getStatus()).body(problem);
+    }
 
 }
