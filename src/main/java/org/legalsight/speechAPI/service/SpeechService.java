@@ -56,13 +56,10 @@ public class SpeechService {
 
     @Transactional
     public String delete(String id) {
-        if (speechRepository.existsById(id)) {
-            log.debug("Deleting speech with id `{}`", id);
-            speechRepository.deleteById(id);
-            return "Speech deleted";
-        }
-        log.debug("Speech with id `{}` does not exist", id);
-        return "Speech not found";
+        speechRepository.findById(id).orElseThrow(() ->
+                new SpeechNotFoundException("Speech " + id + " does not exist or already deleted", HttpStatus.NOT_FOUND.value()));
+        speechRepository.deleteById(id);
+        return "Speech deleted";
     }
 
     public Page<SpeechDTO> search(SearchFilterDTO searchFilterDTO) {
