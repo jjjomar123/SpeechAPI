@@ -225,6 +225,8 @@ http://localhost:8080/v3/api-docs
 Starting the docker..
 docker compose up --build
 
+Removing docker
+docker compose down -v
 ```
 
 ## **🚀 Author**
