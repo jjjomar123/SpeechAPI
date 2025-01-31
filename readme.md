@@ -219,6 +219,14 @@ http://localhost:8080/swagger-ui.html
 http://localhost:8080/v3/api-docs
 ```
 
+📌 **Docker command**:
+
+```
+Starting the docker..
+docker compose up --build
+
+```
+
 ## **🚀 Author**
 
 👤 **Jomar Rhey Ababa**
