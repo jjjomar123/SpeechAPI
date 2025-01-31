@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: jababa
+      changes:
+        - createTable:
+            tableName: speech
+            columns:
+              - column:
+                  name: id
+                  type: varchar(255)
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: author
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: subject
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: speech_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: speech_text
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: version
+                  type: integer
+              - column:
+                  name: creation_date
+                  type: timestamp
+              - column:
+                  name: last_modified
+                  type: timestamp
